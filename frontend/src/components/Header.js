@@ -1,12 +1,14 @@
-import React from 'react'
-import { Navbar } from 'react-bootstrap'
+import React from "react";
+import { Navbar, Container } from "react-bootstrap";
 
 const Header = (props) => {
-    return (        
-        <Navbar bg="light" data-bs-theme="light">        
-            <Navbar.Brand href="/" style={{ color: 'black' }}> {props.title} </Navbar.Brand>                 
-        </Navbar>
-    )
-}
+  return (
+    <Navbar style={{ backgroundColor: "#cccccc" }} data-bs-theme="light">
+      <Container>
+        <Navbar.Brand href="/" style={{ color: "black" }}>{props.title}</Navbar.Brand>
+      </Container>
+    </Navbar>
+  );
+};
 
-export default Header
+export default Header;
