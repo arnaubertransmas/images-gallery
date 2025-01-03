@@ -14,7 +14,6 @@ const App = () => {
     e.preventDefault()
     // amb word controlem cada caràcter q l'user introdueix a l'input
     console.log(word)
-
     fetch(`https://api.unsplash.com/photos/random/?query=${word}&client_id=${UNSPLASH_KEY}`)
       .then((result) => result.json())
       .then((data) => {
@@ -23,6 +22,7 @@ const App = () => {
       .catch((error) => {
         console.log(error)
       })
+    setWord('')
   }  
   // console.log(word)
 
