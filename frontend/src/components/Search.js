@@ -1,8 +1,8 @@
-import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const Search = ({ word, setWord, handleSubmit }) => {
-  return (    
+  return (
     <Container className="mt-5">
       <Row className="justify-content-center">
         {/* // https://react-bootstrap.netlify.app/docs/layout/grid#col */}
@@ -10,7 +10,7 @@ const Search = ({ word, setWord, handleSubmit }) => {
         <Col xs={12} md={8} lg={6}>
           <Form onSubmit={handleSubmit}>
             <Form.Row>
-                {/* agafa 9/12 de l amplada de l input. Les altres 3 les pilla del submit */}
+              {/* agafa 9/12 de l amplada de l input. Les altres 3 les pilla del submit */}
               <Col xs={9}>
                 <Form.Control
                   type="text"
@@ -18,11 +18,13 @@ const Search = ({ word, setWord, handleSubmit }) => {
                   value={word}
                   // quan el input canviï actualitzem el valor de l'estat
                   onChange={(e) => setWord(e.target.value)}
-                  placeholder="Search for new image" 
+                  placeholder="Search for new image"
                 />
               </Col>
               <Col>
-                <Button variant="primary" type="submit">Search</Button>
+                <Button variant="primary" type="submit">
+                  Search
+                </Button>
               </Col>
             </Form.Row>
           </Form>
