@@ -9,6 +9,9 @@ const App = () => {
   // usestate retorna 2 variables, str(word) i function(setWord)
   // '' variable inicial del state
   const [word, setWord] = useState('');
+  const [images, setImages] = useState([]);
+
+  console.log(images);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +22,8 @@ const App = () => {
     )
       .then((result) => result.json())
       .then((data) => {
-        console.log(data);
+        // afegim la nova img al principi i fem un retrive de les images antigues
+        setImages([data, ...images]); // no fem push pq així evitem mutar la llista
       })
       .catch((error) => {
         console.log(error);
