@@ -6,12 +6,12 @@ const Welcome = () => {
     <Jumbotron>
       <h1>Images Gallery</h1>
       <p>
-        Això és una simple aplicaciö. Per començar entra qualsevol text per
+        Això és una simple aplicació. Per començar entra qualsevol text per
         obtenir una imatge.
       </p>
       <p>
         <Button bsStyle="primary" href="https://unsplash.com" target="_blank">
-          Learn more
+          Saber-ne més
         </Button>
       </p>
     </Jumbotron>
