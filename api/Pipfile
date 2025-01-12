@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 flask = "==1.1.2"
+requests = "==2.25.1"
+python-dotenv = "==0.15.0"
+jinja2 = "==3.0.3"
 
 [dev-packages]
 
