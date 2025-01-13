@@ -6,20 +6,21 @@ import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
+// const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
+// si no hi ha cap ruta definida s'utilitzarà la del Backend(Flask)
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
 
 const App = () => {
   // usestate retorna 2 variables, str(word) i function(setWord)
   // '' variable inicial del state
+  // amb word controlem cada caràcter q l'user introdueix a l'input
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    // amb word controlem cada caràcter q l'user introdueix a l'input
-    fetch(
-      `https://api.unsplash.com/photos/random/?query=${word}&client_id=${UNSPLASH_KEY}`,
-    )
+    // ruta reflectint a Flask
+    fetch(`${API_URL}/new-image?query=${word}`)
       .then((result) => result.json())
       .then((data) => {
         // afegim la nova img al principi i fem un retrive de les images antigues

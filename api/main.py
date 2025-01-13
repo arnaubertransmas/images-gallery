@@ -2,6 +2,7 @@ import os
 # mòdul per crear requests del client i enviar-ho a un altre server(UNSPLASH) | per fer peticions a altres APIs
 import requests
 from flask import Flask, request
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path="./.env.local")
@@ -16,6 +17,7 @@ if not UNSPLASH_KEY:
     raise EnvironmentError("Crea .env.local fitxer i posa allà la clau de l'API d'UNSPLASH")
 
 app = Flask(__name__)
+CORS(app)
 
 # auto-reload de Flask
 app.config["DEBUG"] = DEBUG
