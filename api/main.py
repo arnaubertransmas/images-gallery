@@ -7,13 +7,18 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path="./.env.local")
 
 UNSPLASH_URL = "https://api.unsplash.com/photos/random"
+# environ.get del dotenv_path
 UNSPLASH_KEY= os.environ.get("UNSPLASH_KEY", "")
+DEBUG = bool(os.environ.get("DEBUG", True))
 
 # obliguem a l'user tenir una clau d'UNSPLASH
 if not UNSPLASH_KEY:
     raise EnvironmentError("Crea .env.local fitxer i posa allà la clau de l'API d'UNSPLASH")
 
 app = Flask(__name__)
+
+# auto-reload de Flask
+app.config["DEBUG"] = DEBUG
 
 @app.route("/new-image")
 def new_image():
