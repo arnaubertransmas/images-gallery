@@ -5,7 +5,20 @@
         "javascriptreact"
     ],
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
-    "python.pythonPath": "api/.venv/bin/python3"
+
+    "python.defaultInterpreterPath": "api/.venv/bin/python3",
+
+    "black-formatter.path": ["black"],    
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pycodestyleArgs": [
+        "--max-line-lenght=88"
+    ],
+    "pylint.enabled": true,
+    "flake8.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "[python]": {
+        "editor.formatOnSave": true,        
+    }
 }
