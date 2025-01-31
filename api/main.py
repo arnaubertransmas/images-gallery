@@ -26,6 +26,7 @@ app.config["DEBUG"] = DEBUG
 def new_image():
     # request per obtenir acces a la request del client | és enviat a Flask des del client
     word = request.args.get("query") # accedim a paràmetre query de la URL
+    
     headers = {
         "Accept-Version": "v1",
         "Authorization": "Client-ID " + UNSPLASH_KEY,

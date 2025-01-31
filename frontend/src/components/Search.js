@@ -18,7 +18,7 @@ const Search = ({ word, setWord, handleSubmit }) => {
                   value={word}
                   // quan el input canviï actualitzem el valor de l'estat
                   onChange={(e) => setWord(e.target.value)}
-                  placeholder="Busca una nova imatge"
+                  placeholder="Busca una imatge"
                 />
               </Col>
               <Col>

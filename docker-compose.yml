@@ -1,10 +1,25 @@
 version: '3'
 services:
   frontend:
+    # en cas d'error, el contenidor es tornarà a iniciar automàticament
+    restart: always
     build: ./frontend
     ports:
       - '3000:3000'
+    # mapping del frontend local amb el del docker
+    volumes:
+      # evitem fer overwrite del node_modules
+      - /app/node_modules
+      # mapegem el frontend local amb el de l'app x sincronitzar canvis amb el contenidor obert (overwrite)
+      - ./frontend:/app
+    # evitem possibles sync errors
+    environment:
+      - CHOKIDAR_USEPOLLING=true
   api:
+    restart: always
     build: ./api
     ports:
       - '5050:5050'
+    # backend mapping
+    volumes:
+      - ./api:/app
