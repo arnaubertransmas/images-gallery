@@ -23,3 +23,32 @@ services:
     # backend mapping
     volumes:
       - ./api:/app
+  mongo:
+    # no fem build pq la imatge ja existeix a DockerHub
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 12345
+    volumes:
+      # al no poaar ./ no busca ruta sinó volum directament
+      - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      # al estar tot al mateix docker compose al dns busca un nom d'img igual q el server
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 12345
+    # contenidors dels quals depen, sí mongo no inicia mongo-express tp
+    depends_on:
+      - mongo
+
+volumes:
+  # volum personalitzat per poder mapejar amb el container de mongo
+  # així tenir dades persistents
+  mongodb_data:
