@@ -1,6 +1,6 @@
 FROM python:latest
 
-# carpeta on hi haurà tots els fitxers de l'aa
+# carpeta on hi haurà tots els fitxers de l'app
 WORKDIR /app
 
 EXPOSE 5050
