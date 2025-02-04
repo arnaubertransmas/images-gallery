@@ -1,9 +1,14 @@
 import os
 # mòdul per crear requests del client i enviar-ho a un altre server(UNSPLASH) | per fer peticions a altres APIs
 import requests
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+from mongo_client import mongo_client
+
+# creació de db i collection
+gallery = mongo_client.gallery
+images_collection = gallery.images
 
 load_dotenv(dotenv_path="./.env.local")
 
@@ -40,6 +45,26 @@ def new_image():
     
     data = response.json()
     return data
+
+@app.route("/images", methods=["GET", "POST"])
+def images():
+    if request.method == "GET":
+        #* llegim totes les imgs
+        images = images_collection.find({})
+
+        # * jsonify per convertir [],{} a json, recorrem les imgs i ho retornem
+        return jsonify([img for img in images])
+    
+    if request.method == "POST":        
+        #* guardem les imgs
+        # obtenim el document json per passar-lo a l'insert directament
+        image = request.get_json(force=True)
+        image['_id'] = image.get('id')
+
+        result = images_collection.insert_one(image) # per evitar typeerror x ObjectID
+        inserted_id = result.inserted_id
+        return {"inserted_id": inserted_id}
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5050)
