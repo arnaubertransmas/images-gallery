@@ -62,7 +62,7 @@ def images():
         image['_id'] = image.get('id')
 
         result = images_collection.insert_one(image) # per evitar typeerror x ObjectID
-        inserted_id = result.inserted_id
+        inserted_id = result.inserted_id # enviem únicament l'ID
         return {"inserted_id": inserted_id}
 
 

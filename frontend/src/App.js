@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Search from './components/Search';
@@ -17,18 +18,16 @@ const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
     // ruta reflectint a Flask
-    fetch(`${API_URL}/new-image?query=${word}`)
-      .then((result) => result.json())
-      .then((data) => {
-        // afegim la nova img al principi i fem un retrive de les images antigues
-        setImages([{ ...data, title: word }, ...images]); // no fem push pq així evitem mutar la llista
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      // retorna un json directament, seguidament afegim l img a l state
+      const res = await axios.get(`${API_URL}/new-image?query=${word}`);
+      setImages([{ ...res.data, title: word }, ...images]); // no fem push pq així evitem mutar la llista
+    } catch (error) {
+      console.log(error);
+    }
     setWord('');
   };
 
