@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
@@ -17,6 +17,20 @@ const App = () => {
   // amb word controlem cada caràcter q l'user introdueix a l'input
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
+
+  const getSavedImages = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/images`);
+      setImages(res.data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // callback funcion + dependencies, array buit pq només es cridi un cop
+  useEffect(() => {
+    getSavedImages();
+  }, []);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
