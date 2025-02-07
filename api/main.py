@@ -65,6 +65,24 @@ def images():
         inserted_id = result.inserted_id # enviem únicament l'ID
         return {"inserted_id": inserted_id}
 
+@app.route("/images/<image_id>", methods=["DELETE"])
+def delete_image(image_id):
+    try:
+        if request.method == "DELETE":
+            # eliminem de la BD
+            result = images_collection.delete_one({"_id": image_id})
 
+            if not result:
+                return {"error": "no s'ha pogut borrar l'img"}, 500
+            
+            if result and not result.deleted_count:
+                return {"error": "img not found"}, 404
+            
+            # retornem l id de l img eliminada
+            return {f"deleted_id": image_id}, 200
+        
+    except Exception as error:
+        return {error}, 400
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5050)
